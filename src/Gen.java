@@ -1,268 +1,50 @@
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Реализовать generic-метод поиска всех элементов в списке больше заданного значения.
  * Элементы и значение должны быть числового типа.
  */
-public class Gen<L> {
-    private L list;
-    private Number value;
-    public List<Number> getResult() {
-        return result;
-    }
+public class Gen {
 
-    private List<Number> result = new ArrayList<>();
-
-    public Gen(L list, Number value) {
-        this.list = list;
-        this.value = value;
-    }
-    public String checkValue(Number q){
-        String s = null;
-        Object o;
-        try{
-            o = new Byte(q.toString());
-            s = "byte";
-        }
-        catch(NumberFormatException b_ex){
-            try{
-                o = new Short(q.toString());
-                s = "short";
-            }
-            catch(NumberFormatException s_ex){
-                try{
-                    o = new Integer(q.toString());
-                    s = "int";
-                }
-                catch(NumberFormatException i_ex){
-                    try{
-                        o = new Long(q.toString());
-                        s = "long";
-                    }
-                    catch(NumberFormatException l_ex){
-                        try{
-                            o = new Float(q.toString());
-                            s = "float";
-                        }
-                        catch(NumberFormatException f_ex){
-                            try{
-                                o = new Double(q.toString());
-                                s = "double";
-                            }
-                            catch(NumberFormatException d_ex){
-                                try{
-                                    o = new BigInteger(q.toString());
-                                    s = "bigInt";
-                                }
-                                catch(NumberFormatException bi_ex){
-                                    try{
-                                        o = new BigDecimal(q.toString());
-                                        s = "bigDec";
-                                    }
-                                    catch(NumberFormatException bd_ex){
-                                        System.out.println("Не соответствует ни одному числовому формату.");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
+    public static <T extends Number & Comparable<? super T>> List<T> compareList(List<T> list, T value) {
+        List<T> l_val = new ArrayList<>();
+        for(T t : list){
+            if(t.compareTo(value)> 0){
+                l_val.add(t);
             }
         }
-        return s;
+        return l_val;
     }
-    public int compareTo(Number o) {
-        int i = 0;
-        switch(checkValue(o)){
-            case "byte": switch(checkValue(value)){
-                case "byte": i = ((Byte) o.byteValue()).compareTo(new Byte(value.toString()));
-                    break;
-                case "short": i = ((Short) o.shortValue()).compareTo(new Short(value.toString()));
-                    break;
-                case "int": i = ((Integer) o.intValue()).compareTo(new Integer(value.toString()));
-                    break;
-                case "long": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "float": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "double": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "short": switch(checkValue(value)){
-                case "byte": i = ((Short) o.shortValue()).compareTo(new Short(value.toString()));
-                    break;
-                case "short": i = ((Short) o.shortValue()).compareTo(new Short(value.toString()));
-                    break;
-                case "int": i = ((Integer) o.intValue()).compareTo(new Integer(value.toString()));
-                    break;
-                case "long": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "float": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "double": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "int": switch(checkValue(value)){
-                case "byte": i = ((Integer) o.intValue()).compareTo(new Integer(value.toString()));
-                    break;
-                case "short": i = ((Integer) o.intValue()).compareTo(new Integer(value.toString()));
-                    break;
-                case "int": i = ((Integer) o.intValue()).compareTo(new Integer(value.toString()));
-                    break;
-                case "long": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "float": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "double": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "long":  switch(checkValue(value)){
-                case "byte": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "short": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "int": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "long": i = ((Long) o.longValue()).compareTo(new Long(value.toString()));
-                    break;
-                case "float": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "double": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "float": switch(checkValue(value)){
-                case "byte": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "short": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "int": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "long": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "float": i = ((Float) o.floatValue()).compareTo(new Float(value.toString()));
-                    break;
-                case "double": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "double": switch(checkValue(value)){
-                case "byte": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "short": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "int": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "long": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "float": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "double": i = ((Double) o.doubleValue()).compareTo(new Double(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "bigInt": switch(checkValue(value)){
-                case "byte": i =   (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "short": i =  (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "int": i =    (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "long": i =   (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "float": i =  (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "double": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigInt": i = (new BigInteger(o.toString())).compareTo(new BigInteger(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-            case "bigDec":  switch(checkValue(value)){
-                case "byte": i =   (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "short": i =  (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "int": i =    (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "long": i =   (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "float": i =  (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "double": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "bigInt": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-                case "bigDec": i = (new BigDecimal(o.toString())).compareTo(new BigDecimal(value.toString()));
-                    break;
-            }
-                break;
-        }
-        return i;
-    }
-    public List<Number> compareList(){
-        for (Number number : (List<Number>) list) {
-            if (compareTo(number) > 0) {
-                result.add(number);
-            }
-        }
-        return result;
-    }
-
-    public void printResult(List<Number> l){
-        for(Number n : l){
-            System.out.println(n);
-        }
-    }
-
     public static void main(String[] args) {
-        List<Number> list = new ArrayList<Number>(){{
-            add(2);
-            add(3);
-            add(3.6);
-            add(45);
-            add(198.65);
-            add(46);
-            add(4);
-            add(new BigInteger("654654165165165161109618081851"));
-            add(new BigDecimal("654654165165165161106516196198098198098198198419618081851.654161981981981981"));
+        List<Integer> listI = new ArrayList<Integer>(){{
+            add(new Integer(2));
+            add(new Integer(3));
+            add(new Integer(46));
+            add(new Integer(4));
         }};
-        Gen<List<Number>> gen = new Gen<>(list, 3.5);
-        gen.compareList();
-        gen.printResult(gen.getResult());
+        List<BigInteger> listBI = new ArrayList<BigInteger>(){{
+            add(new BigInteger("252352351352351352355"));
+            add(new BigInteger("252352351343323234352351352355"));
+            add(new BigInteger("2523523521421343323234352351352355"));
+            add(new BigInteger("25235223412351343323234352351352355"));
+        }};
+        List<BigDecimal> listBD = new ArrayList<BigDecimal>(){{
+            add(new BigDecimal("252352351352351352355.16541"));
+            add(new BigDecimal("252352351343323234352351352355.15465"));
+            add(new BigDecimal("252352355555555555555555555555555552351352355.56546541"));
+            add(new BigDecimal("252352266666666666666666666666666651343323234352351352355.65465"));
+        }};
+        List<Double> listD = new ArrayList<Double>(){{
+            add(new Double("252352351352351352353423423423423423423423423423423423423445.16541"));
+            add(new Double("252352351343323234352351352355.15465"));
+            add(new Double("2523523521435465334564354521343323234352351352355.56546541"));
+            add(new Double("25235223412363455566666666666666666666666666666666666635635634563456456345351343323234352351352355.65465"));
+        }};
+        System.out.println(compareList(listI, 3));
+        System.out.println(compareList(listBI, new BigInteger("323124124125125125412351254")));
+        System.out.println(compareList(listBD, new BigDecimal("32355555555555555555555555524125125125412351254.1")));
+        System.out.println(compareList(listD, new Double("3231241241356353555555555556456345645645625125125412351254.1")));
     }
 }
